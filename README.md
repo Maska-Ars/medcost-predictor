@@ -20,10 +20,9 @@
 
 ### Установка
 
-1. Клонируйте репозиторий:
 ```bash
-git clone <url-репозитория>
-cd <папка-проекта>
+git clone <https://github.com/Maska-Ars/medcost-predictor/tree/master>
+cd <medcost-predictor>
 pip install -r requirements.txt
 python app.py
 ```
