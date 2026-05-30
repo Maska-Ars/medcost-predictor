@@ -33,14 +33,12 @@ def predict_insurance_cost(age, sex, bmi, children, smoker, region):
     prediction = cat.predict(input_data)
 
     if isinstance(prediction[0], (int, float)):
-        return f"{prediction[0]:,.2f}"
-    else:
-        return f"{prediction[0]}"
+        return prediction[0]
 
 
-with gr.Blocks(title="Предсказатель стоимости страховки") as demo:
+with gr.Blocks(title="Предсказатель стоимости страховки") as app:
     gr.Markdown("""
-    # 🏥 Предсказатель стоимости страховки
+    # Предсказатель стоимости страховки
 
     Введите данные пациента ниже, чтобы получить оценку стоимости страховки на основе модели машинного обучения.
     """)
@@ -101,12 +99,12 @@ with gr.Blocks(title="Предсказатель стоимости страхо
             )
 
             gr.Markdown("""
-            ### 📊 О модели
+            ### О модели
             - **Тип модели**: CatBoostRegressor
             - **Признаки**: Возраст, Пол, ИМТ, Количество детей, Статус курения, Регион
             - **Целевой показатель**: Стоимость страховки
 
-            ### ℹ️ Категории ИМТ
+            ### Категории ИМТ
             - Недостаточный вес: < 18.5
             - Нормальный вес: 18.5 - 24.9
             - Избыточный вес: 25 - 29.9
@@ -119,7 +117,7 @@ with gr.Blocks(title="Предсказатель стоимости страхо
 
 
     predict_btn.click(
-        fn=predict_insurance_cost,
+        fn=lambda *args: f'{predict_insurance_cost(*args):,.2f} долларов',
         inputs=[age, sex, bmi, children, smoker, region],
         outputs=output
     )
@@ -130,7 +128,7 @@ with gr.Blocks(title="Предсказатель стоимости страхо
     )
 
     gr.Markdown("""
-    ### 📝 Примеры
+    ### Примеры
     Нажмите на любой пример ниже, чтобы автоматически заполнить поля:
     """)
 
@@ -182,7 +180,7 @@ with gr.Blocks(title="Предсказатель стоимости страхо
 
     gr.Markdown("""
     ---
-    ### 💡 Как рассчитывается ИМТ
+    ### Как рассчитывается ИМТ
     ИМТ = вес (кг) / рост² (м²)
 
     **Пример:** Человек с весом 70 кг и ростом 1.75 м имеет ИМТ = 22.86
@@ -190,7 +188,7 @@ with gr.Blocks(title="Предсказатель стоимости страхо
 
 
 if __name__ == "__main__":
-    demo.launch(
+    app.launch(
         share=False,
         server_port=7860,
         debug=False
