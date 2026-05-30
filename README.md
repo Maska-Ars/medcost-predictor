@@ -24,10 +24,15 @@
 git clone <https://github.com/Maska-Ars/medcost-predictor/tree/master>
 cd <medcost-predictor>
 pip install -r requirements.txt
-python app.py
 ```
 
-### Использование
+### Запуск
+
+```bash
+python app.py
+```
+## Использование
+
 Введите данные пациента в форму слева:
 - Возраст (от 0 до 200 лет)
 - Пол (Male/Female)
